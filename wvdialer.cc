@@ -628,7 +628,8 @@ void WvDialer::load_options()
     	{ "Baud",            NULL, &options.baud,          "", DEFAULT_BAUD },
     	{ "Carrier Check",   NULL, &options.carrier_check, "", true         },
     	{ "Stupid Mode",     NULL, &options.stupid_mode,   "", false        },
-    	{ "New PPPD",	     NULL, &options.new_pppd, 	   "", true         },
+	{ "New PPPD",	    NULL, &options.new_pppd, 	   "", true         },
+	{ "PPPD Debug",	  NULL, &options.pppd_debug,    "", false         },
     	{ "Auto Reconnect",  NULL, &options.auto_reconnect,"", true	    },
         { "Dial Attempts",   NULL, &options.dial_attempts, "", 0            },
     	{ "Abort on Busy",   NULL, &options.abort_on_busy, "", false	    },
@@ -642,6 +643,7 @@ void WvDialer::load_options()
         { "ISDN",            NULL, &options.isdn,          "", false        },
         { "Ask Password",    NULL, &options.ask_password,  "", false        },
         { "Dial Timeout",    NULL, &options.dial_timeout,  "", 60           },
+        { "No Compression",    NULL, &options.no_comp,  "", false           },
 
     	{ NULL,		     NULL, NULL,                   "", 0            }
     };
@@ -1201,7 +1203,8 @@ void WvDialer::start_ppp()
 	::close( pppd_passwdfd[1] );
 	buffer2.append("%s", pppd_passwdfd[0] );
     }
-    
+
+#define COMPOPT(OPT) 	options.no_comp ? #OPT : NULL
     char const *argv_raw[] = {
         options.where_pppd,
 	speed,
@@ -1212,13 +1215,16 @@ void WvDialer::start_ppp()
 	"-detach",
 	"user", options.login,
 	(!!options.force_addr) ? (const char *)addr_colon : "noipdefault",
-	options.new_pppd ? "call" : NULL, 
+	options.new_pppd ? "call" : NULL,
 	options.new_pppd ? "wvdial" : NULL,
+        COMPOPT(noccp), COMPOPT(nopcomp), COMPOPT(novj),
+        COMPOPT(novjccomp), COMPOPT(nobsdcomp), COMPOPT(noaccomp),
 	options.new_pppd && options.auto_dns ? "usepeerdns"	   : NULL,
 	options.new_pppd && options.isdn     ? "default-asyncmap"  : NULL,
+	options.new_pppd && (!!options.pppd_debug) ? "debug" : NULL,
 	options.new_pppd && (!!options.pppd_option) ? (const char *) options.pppd_option : NULL,
-	options.new_pppd && options.idle_seconds >= 0 ? "idle"	   : NULL, 
-	options.new_pppd && options.idle_seconds >= 0 ? (const char *)idle_seconds : NULL, 
+	options.new_pppd && options.idle_seconds >= 0 ? "idle"	   : NULL,
+	options.new_pppd && options.idle_seconds >= 0 ? (const char *) idle_seconds : NULL,
 	"logfd", buffer1,
 //	!!buffer2 ? "passwordfd" : NULL, !!buffer2 ? (const char *)buffer2 : NULL,
 	NULL

@@ -129,6 +129,7 @@ public:
 	int              carrier_check;
 	int		stupid_mode;
 	int		new_pppd;
+	int		pppd_debug;
 	int		auto_reconnect;
 	int		abort_on_busy;
 	int		abort_on_no_dialtone;
@@ -142,10 +143,10 @@ public:
 	int              isdn;
 	int              ask_password;
 	int              dial_timeout;
-       
+	int              no_comp;
     } options;
-   
-   
+
+
     WvDialMon pppd_mon;               // class to analyse messages of pppd
    
    
