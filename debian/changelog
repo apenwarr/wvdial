@@ -140,8 +140,8 @@ wvdial (1.51) unstable; urgency=medium
 
   *  It should be mentioned somewhere that all of these nifty new features
      are pretty much completely untested. So please bang at them, look at them,
-     and please send the bug reports to wvdial-list@lists.nit.ca. That's where 
-     all of the cool wvdial hackers hang out ;)
+     and please send the bug reports to wvstreams-devel@googlegroups.com.
+     That's where all of the cool wvdial hackers hang out ;)
 
  -- Patrick Patterson <ppatters@debian.org>  Mon,  4 Mar 2002 12:26:20 -0500
 

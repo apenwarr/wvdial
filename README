@@ -64,7 +64,7 @@ few things installed on your Linux system:
 	- WvStreams; version 4.4 or higher.
 
 Almost any halfway modern Linux system should have all of these. The last is
-available from http://alumnit.ca/wiki/index.php?page=DownloadReleases
+available from http://alumnit.ca/wiki/?DownloadReleases
 
 Building WvDial is a simple matter.  First, check the Makefile to see if
 everything looks okay to you.  By default, wvdial and wvdialconf will
@@ -259,7 +259,7 @@ Even though this is supposed to be a stable release, there may still be bugs
 in this thing.  Tell us about them, every last one.  For up-to-date contact
 information, see the WvDial web page at:
 
-		http://alumnit.ca/wiki/index.php?page=WvDial
+		http://alumnit.ca/wiki/?WvDial
 
 ...have fun with it!
 
